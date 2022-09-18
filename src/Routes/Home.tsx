@@ -5,6 +5,7 @@ import { getMovies, IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
 import { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import MainMovie from "../Components/MainMovie";
 
 const Wrapper = styled.div`
   background: black;
@@ -16,27 +17,6 @@ const Loader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const Banner = styled.div<{ bgPhoto: string }>`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-    url(${(props) => props.bgPhoto});
-  background-size: cover;
-`;
-
-const Title = styled.h2`
-  font-size: 68px;
-  margin-bottom: 20px; ;
-`;
-
-const Overview = styled.p`
-  font-size: 30px;
-  width: 50%;
 `;
 
 const Slider = styled.div`
@@ -197,13 +177,13 @@ function Home() {
         <Loader>Loading...</Loader>
       ) : (
         <>
-          <Banner
-            onClick={incraseIndex}
-            bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}
-          >
-            <Title>{data?.results[0].title}</Title>
-            <Overview>{data?.results[0].overview}</Overview>
-          </Banner>
+          <MainMovie
+            onClick={incraseIndex} 
+            bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")} 
+            title={data?.results[0].title} 
+            overview={data?.results[0].overview} 
+          />
+
           <Slider>
             <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
               <Row
