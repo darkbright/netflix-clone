@@ -18,6 +18,6 @@ export const Title = styled.h2`
 `;
 
 export const Overview = styled.p`
-  font-size: 40px;
+  font-size: 20px;
   width: 40%;
 `;

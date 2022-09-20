@@ -30,7 +30,7 @@ const ContentBox = styled.div`
 const Title = styled.div`
   padding-left: 2%;
   padding-bottom: 15px;
-  font-size: 35px;
+  font-size: 25px;
   font-weight: bold;
   position: relative;
   top: -150px;
@@ -68,19 +68,19 @@ const Tv = () => {
           <Banner data={popular} />
           <Contents>
             <ContentBox>
-              <Title>평단의 찬사를 받은 시리즈</Title>
+              <Title>평단의 찬사를 받은!</Title>
               <Slider data={topRated} type="topRated" category="tv"/>
             </ContentBox>
             <ContentBox>
-              <Title>취향 저격 인기 콘텐츠</Title>
+              <Title>취향 저격 인기!</Title>
               <Slider data={popular} type="Popular" category="tv"/>
             </ContentBox>
             <ContentBox>
-              <Title>오늘 바로 방영! 콘텐츠</Title>
+              <Title>오늘 바로 방영!</Title>
               <Slider data={airingToday} type="AiringToday" category="tv"/>
             </ContentBox>
             <ContentBox>
-              <Title>NEW! 요즘 대세 콘텐츠</Title>
+              <Title>NEW! 요즘 대세!</Title>
               <Slider data={onTheAir} type="onTheAir" category="tv"/>
             </ContentBox>
           </Contents>

@@ -94,7 +94,7 @@ const Header = () => {
         <Items>
           <Item>
             <Link to="/movie">
-              홈 {homeMatch && <Circle layoutId="circle" />}
+              영화 {homeMatch && <Circle layoutId="circle" />}
             </Link>
           </Item>
           <Item>
