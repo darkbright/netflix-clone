@@ -43,26 +43,28 @@ const Loader = styled.div`
   align-items: center;
 `;
 
+const useMultipleQuery = () => {
+  return [
+    useQuery(["movie", "latest"], getMoviesLatest),
+    useQuery(["movie", "topRated"], getMoviesTopRated),
+    useQuery(["movie", "upcoming"], getMoviesUpcoming),
+  ];
+}
+
 const Movie = () => {
-  const { data: topRated, isLoading } = useQuery<IGetMoviesResult>(
-    ["movies", "TopRated"],
-    getMoviesTopRated
-  );
-  const { data: Latest, isLoading: isLoading2 } = useQuery<IGetMoviesResult>(
-    ["movies", "Latest"],
-    getMoviesLatest
-  );
-  const { data: Upcoming, isLoading: isLoading3 } = useQuery<IGetMoviesResult>(
-    ["movies", "Upcoming"],
-    getMoviesUpcoming
-  );
-  return (
+  const [
+    { data: latest,   isLoading: isLoadingLatest },
+    { data: topRated, isLoading: isLoadingTopRated },
+    { data: upcoming, isLoading: isLoadingUpcoming }
+ ] = useMultipleQuery();
+
+ return (
     <Wrapper>
-      {isLoading && isLoading2 && isLoading3 ? (
+      {isLoadingLatest && isLoadingTopRated && isLoadingUpcoming ? (
         <Loader>Loading...</Loader>
       ) : (
         <>
-          <Banner data={Latest} />
+          <Banner data={latest} />
           <Contents>
             <ContentBox>
               <Title>평단의 찬사를 받은!</Title>
@@ -70,16 +72,16 @@ const Movie = () => {
             </ContentBox>
             <ContentBox>
               <Title>지금 뜨는!</Title>
-              <Slider data={Latest} type="Latest" category="movie"/>
+              <Slider data={latest} type="Latest" category="movie"/>
             </ContentBox>
             <ContentBox>
               <Title>NEW! 요즘 대세!</Title>
-              <Slider data={Upcoming} type="Upcoming" category="movie"/>
+              <Slider data={upcoming} type="Upcoming" category="movie"/>
             </ContentBox>
           </Contents>
           <Modal data={topRated} type="topRated" category="movie"/>
-          <Modal data={Latest} type="Latest" category="movie"/>
-          <Modal data={Upcoming} type="Upcoming" category="movie"/>
+          <Modal data={latest} type="Latest" category="movie"/>
+          <Modal data={upcoming} type="Upcoming" category="movie"/>
         </>
       )}
     </Wrapper>

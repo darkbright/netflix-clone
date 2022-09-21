@@ -43,25 +43,26 @@ const Loader = styled.div`
   align-items: center;
 `;
 
+const useMultipleQuery = () => {
+  return [
+    useQuery(["tv", "popular"],     getTvShowsPopular),
+    useQuery(["tv", "topRated"],    getTvShowsTopRated),
+    useQuery(["tv", "onTheAir"],    getTvShowsOnTheAir),
+    useQuery(["tv", "airingToday"], getTvShowsAiringToday),
+  ];
+}
+
 const Tv = () => {
-  const { data: popular, isLoading: loadPopular } = useQuery<IGetShowsResult>(
-    ["tv", "Popular"],
-    getTvShowsPopular
-  );
-  const { data: topRated, isLoading: loadTopRated } = useQuery<IGetShowsResult>(
-    ["tv", "TopRated"],
-    getTvShowsTopRated
-  );
-  const { data: onTheAir, isLoading: loadOnTheAir } = useQuery<IGetShowsResult>(
-    ["tv", "OnTheAir"],
-    getTvShowsOnTheAir
-  );
-  const { data: airingToday, isLoading: loadAiringToday } =
-    useQuery<IGetShowsResult>(["tv", "AiringToday"], getTvShowsAiringToday);
+  const [
+    { data: popular,      isLoading: isLoadingPopular },
+    { data: topRated,     isLoading: isLoadingTopRated },
+    { data: onTheAir,     isLoading: isLoadingOnTheAir },
+    { data: airingToday,  isLoading: isLoadingAiringToday }
+  ] = useMultipleQuery();
 
   return (
     <Wrapper>
-      {loadPopular && loadTopRated && loadOnTheAir && loadAiringToday ? (
+      {isLoadingPopular && isLoadingTopRated && isLoadingOnTheAir && isLoadingAiringToday ? (
         <Loader>Loading...</Loader>
       ) : (
         <>

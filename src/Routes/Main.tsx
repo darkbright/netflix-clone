@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import Header from "../components/Header";
 import BlockMobile from "../lib/BlockMobile";
 import Movie from "./Movie";
@@ -11,7 +11,7 @@ const Main = () => {
       <BlockMobile />
       <Header />
       <Routes>
-        <Route path="/" element={<Movie />} />
+        <Route path="/" element={ <Navigate to="/movie" /> } />
         <Route path="/movie" element={<Movie />} />
         <Route path="/movie/*" element={<Movie />} />
         <Route path="/tv" element={<Tv />} />
